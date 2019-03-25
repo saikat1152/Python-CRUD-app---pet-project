@@ -1,6 +1,6 @@
 # pet_project
 
-Employee CRUD application
+Employee CRUD application With Python 3.6
 
 1. Add employee 
 2. Edit employee

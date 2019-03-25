@@ -1,0 +1,56 @@
+{% extends "layout.html"%}
+{% block body %}
+
+
+<h1 xmlns="http://www.w3.org/1999/html"> Employee Crud App</h1>
+
+ <h2> Employee List <button type="btn btn-success " style="float: right" data-toggle="modal" data-target="#mymodal">
+                      Add Employee</button> </h2>
+
+                    {% include 'employees/modalForm.html' %}
+
+{% with messages = get_flashed_messages() %}
+ {% if messages %}
+{% for message in messages %}
+<div class="alert alert-success">
+    {{messages[0]}}
+</div>
+{%endfor%}
+{% endif %}
+                      {% endwith %}
+
+
+                  <table class="table table-striped">
+                      <thead>
+                          <th>Employee Id</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Salary</th>
+                          <th>Department</th>
+
+                      </thead>
+                      <tbody>
+                      {% for row in employee %}
+
+                      <tr>
+                          <td>{{row.0}}</td>
+                          <td>{{row.1}}</td>
+                          <td>{{row.2}}</td>
+                          <td>{{row.3}}</td>
+                          <td>{{row.4}}</td>
+                          <td>
+                              <a href="{{url_for('update', id=row.0)}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                              {% include 'employees/modalEditForm.html' %}
+
+                              <a href="{{url_for('delete', id=row.0)}}" class="btn btn-warning btn-xs" onclick="return confirm('Are you sure To Delete?')">Delete</a>
+                          </td>
+                      </tr>
+                      {% endfor %}
+
+
+                      </tbody>
+
+                  </table>
+
+
+{% endblock %}
